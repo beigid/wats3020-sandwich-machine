@@ -2,8 +2,6 @@
 
 // Step One ///////////////////////////////////////////////////////////
 //
-// Gather data from the user using the prompt() command.
-// Users will fill in each prompt with text.
 // Provide examples where it may help (e.g. show a comma-separated list of
 // toppings to indicate how to specify toppings, etc.)
 //
