@@ -1,39 +1,13 @@
-/* JavaScript for WATS 3020 Sandwich Machine Assignment */
-
-// Step One ///////////////////////////////////////////////////////////
-//
-// Provide examples where it may help (e.g. show a comma-separated list of
-// toppings to indicate how to specify toppings, etc.)
-//
-// TODO: Prompt the user for what kind of bread they would like.
-// Ideally, that would look something like: "What kind of bread (white, wheat, flat)?"
 
 
-
-// TODO: Prompt the user for what kind of meat(s) they would like.
-// Indicate they should separate multiple items with a comma:
-// "What kind of meat? (Separate meats with a comma if you would like more than one.)"
-
-
-
-// TODO: Prompt the user for what kind of toppings they would like.
-// We expect this to be multiple, so ask them to provide you with a
-// comma-separated list using a user friendly prompt.
+// Prompts for what items user wants on their sandwich - to be calculated below
+let sandwichBread = prompt("What kind of bread would you like? (white, wheat, flat.)");
+let sandwichMeat = prompt("What kind of meat would you like? (Separate multiple choices with a comma.)");
+let sandwichToppings = prompt("What toppings would you like? (Separate multiple choices with a comma.)");
+let sandwichCondiments = prompt("What condiments would you like? (Separate multiple choices with a comma.)");
 
 
-
-// TODO: Prompt the user for what kind of condiments they would like.
-// Again, we should expect a comma-separated list if items here.
-
-
-
-// Step Two ////////////////////////////////////////////////////////////
-//
-// Process all the input to calculate values for the user's order. The named
-// values are initialized to `null`. Change that so they equal the proper value.
-//
 // The `prices` object below specifies the prices for each thing.
-
 let prices = {
     sandwich: 5, // Base price for a sandwich is $5, includes bread
     meat: 1, // Each kind of meat on a sandwich costs $1
@@ -41,31 +15,31 @@ let prices = {
     condiment: 0.25 // Each condiment costs $0.25
 };
 
-// TODO: Convert order information from Strings to Arrays.
+// Turns the information from String to Arrays dependig on user input for sandwich.
+let meatArray = sandwichMeat.split(',');
+let toppingArray = sandwichToppings.split(',');
+let condimentArray = sandwichCondiments.split(',');
 
-let meatArray = null;
-let toppingArray = null;
-let condimentArray = null;
 
-// TODO: Calculate cost for meat, toppings, and condiments.
-// This requires you to determine the length of each Array you just made
-// and multiply out the costs. You will need to refer to the attributes of the
-// `prices` object in order to calculate these costs.
+// Used to calculate amount of items chosen by the prices of each sandwich item. 
+let meatCost = meatArray.length * prices.meat;
+let toppingCost = toppingArray.length * prices.topping;
+let condimentCost = condimentArray.length * prices.topping;
 
-let meatCost = null;
-let toppingCost = null;
-let condimentCost = null;
+// Combined totals and costs to get subtotal
+let subtotal = prices.sandwich + meatCost + toppingCost + condimentCost;
 
-// TODO: Combine the costs of each part of the sandwich to get the subtotal.
-let subtotal = null;
-
-// TODO: Calculate the tax owed using the waStateTaxRate.
+//  State tax rate calculated for final cost
 let waStateTaxRate = 0.065;
-let orderTax = null;
+let orderTax = subtotal * waStateTaxRate;
 
-// TODO: Calculate `totalPrice` by adding `subtotal` and `orderTax`.
-let totalPrice = null;
+// Subtotal and Washington tax prices combined for total
+let totalPrice = subtotal + orderTax;
 
+// Calculating suggested tip percentages
+let tenPercentTip = totalPrice * 0.10;
+let fifteenPercentTip = totalPrice * 0.15;
+let twentyPercentTip = totalPrice * 0.20; 
 
 // Step Three //////////////////////////////////////////////////////////
 //
@@ -76,20 +50,26 @@ let totalPrice = null;
 
 let receiptTemplate = `
     <p>SANDWICH ORDER</p>
-    <p>Bread: wheat</p>
-    <p>Meat: ham, turkey</p>
-    <p>Toppings: lettuce, tomato, peppers, spinach</p>
-    <p>Condiments: mayo, mustard, thousand island</p>
+    <p>Bread: ${sandwichBread}</p>
+    <p>Meat: ${sandwichMeat}</p>
+    <p>Toppings: ${sandwichToppings}</p>
+    <p>Condiments:${sandwichCondiments}</p>
     <p>---------------------</p>
-    <p class="text-right">Sandwich: $4.42</p>
-    <p class="text-right">Meat: $2.00</p>
-    <p class="text-right">Toppings: $2.00</p>
-    <p class="text-right">Condiments: $1.42</p>
+    <p class="text-right">Sandwich: $${prices.sandwich.toFixed(2)}</p>
+    <p class="text-right">Meat: $${meatCost.toFixed(2)}</p>
+    <p class="text-right">Toppings: $${toppingCost.toFixed(2)}</p>
+    <p class="text-right">Condiments: $${condimentCost.toFixed(2)}</p>
     <p class="text-right">--------</p>
-    <p class="text-right">Subtotal: $9.84</p>
-    <p class="text-right">Tax: $1.42</p>
+    <p class="text-right">Subtotal: $${subtotal.toFixed(2)}</p>
+    <p class="text-right">Tax: $${orderTax.toFixed(2)}</p>
     <p class="text-right">--------</p>
-    <p class="text-right">Total: $4.84</p>
+    <p class="text-right boldtext">Total: $${totalPrice.toFixed(2)}</p>
+    <p>---------------------</p>
+    <p class="text-center">Suggested Tip:</p> 
+    <p class="text-center">10% = $${tenPercentTip.toFixed(2)}</p> 
+    <p class="text-center">15% = $${fifteenPercentTip.toFixed(2)}</p>
+    <p class="text-center">20% = $${twentyPercentTip.toFixed(2)}</p>
+    
 `
 
 ///////////////////////////////////////////////////////////////////////

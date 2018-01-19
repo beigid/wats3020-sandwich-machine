@@ -27,3 +27,11 @@
 .text-right {
     text-align: right;
 }
+
+.text-center {
+    text-align: center;
+}
+
+.boldtext {
+  font-weight: 200
+}
