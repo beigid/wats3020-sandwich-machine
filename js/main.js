@@ -24,7 +24,7 @@ let condimentArray = sandwichCondiments.split(',');
 // Used to calculate amount of items chosen by the prices of each sandwich item. 
 let meatCost = meatArray.length * prices.meat;
 let toppingCost = toppingArray.length * prices.topping;
-let condimentCost = condimentArray.length * prices.topping;
+let condimentCost = condimentArray.length * prices.condiment;
 
 // Combined totals and costs to get subtotal
 let subtotal = prices.sandwich + meatCost + toppingCost + condimentCost;
